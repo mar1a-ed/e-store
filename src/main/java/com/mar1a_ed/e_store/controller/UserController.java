@@ -46,9 +46,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(UserMapper.toListDto(users));
     }
 
-    @PatchMapping("/update-password?id={id}")
+    @PatchMapping("/update-password/id={id}")
     public ResponseEntity<String> updatePassword(@PathVariable Long id, @Valid @RequestBody UserUpdatePasswordDto userUpdatePasswordDto){
         userService.updatePassword(id, userUpdatePasswordDto.getCurrentPassword(), userUpdatePasswordDto.getNewPassword(), userUpdatePasswordDto.getConfirmPassword());
-        return ResponseEntity.ok(userUpdatePasswordDto.getNewPassword());
+        return ResponseEntity.ok().build();
     }
 }

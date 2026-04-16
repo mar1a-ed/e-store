@@ -63,7 +63,7 @@ public class UserService {
             throw new RuntimeException("The 'newPassword' does not match with 'confirmPassword'");
         }
 
-        if(user.getPassword() != currentPassword){
+        if(!user.getPassword().equals(currentPassword)){
             throw new RuntimeException("The 'currentPassword' does not match with the Current Password");
         }
 
