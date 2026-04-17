@@ -4,3 +4,4 @@ use e_store;
 
 select * from users;
 select * from clients;
+select * from products;
