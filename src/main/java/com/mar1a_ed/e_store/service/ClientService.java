@@ -52,7 +52,7 @@ public class ClientService {
         }
     }
 
-    public List<Client> findByNameContains(String name){
+    public List<Client> findByNameContaining(String name){
         try{
             List<Client> clients = clientRepository.findClientByNameContaining(name);
             return clients;
