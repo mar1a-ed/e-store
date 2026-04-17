@@ -32,7 +32,7 @@ public class Order implements Serializable {
     private Client client;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

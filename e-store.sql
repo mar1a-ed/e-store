@@ -5,3 +5,5 @@ use e_store;
 select * from users;
 select * from clients;
 select * from products;
+select * from order_items;
+select * from orders;
