@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -21,6 +23,12 @@ public class OrderController {
     public ResponseEntity<OrderResponseDto> create(@PathVariable String clientCode, @Valid @RequestBody OrderCreateDto orderCreateDto){
         OrderResponseDto orderResponseDto = orderService.create(clientCode, orderCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderResponseDto);
+    }
+
+    @GetMapping("/client_code={clientCode}")
+    public ResponseEntity<List<OrderResponseDto>> findByClientCode(@PathVariable String clientCode){
+        List<OrderResponseDto> orderResponseDtoList = orderService.findByClientCode(clientCode);
+        return ResponseEntity.ok(orderResponseDtoList);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.mar1a_ed.e_store.service;
 
 import com.mar1a_ed.e_store.dto.order.*;
+import com.mar1a_ed.e_store.exception.ClientNotFoundException;
 import com.mar1a_ed.e_store.exception.ProductNotFoundException;
 import com.mar1a_ed.e_store.model.entity.Client;
 import com.mar1a_ed.e_store.model.entity.Order;
@@ -61,5 +62,17 @@ public class OrderService {
         )).toList();
 
         return new OrderResponseDto(order.getId(), order.getClient().getName(), items, order.getOrderStatus().toString(), order.getTotalPrice());
+    }
+
+    public List<OrderResponseDto> findByClientCode(String clientCode){
+
+        List<Order> orders = orderRepository.findByClientCode(clientCode);
+
+        List<OrderResponseDto> orderResponseDto = orders.stream().map(order -> new OrderResponseDto(
+                order.getId(), order.getClient().getName(), order.getItems().stream().map(orderItem ->
+                        new OrderItemResponseDto(orderItem.getProduct().getName(), orderItem.getQuantity(), orderItem.getSubTotal())).toList(),
+                order.getOrderStatus().name(), order.getTotalPrice())).toList();
+
+        return orderResponseDto;
     }
 }
